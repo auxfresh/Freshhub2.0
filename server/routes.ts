@@ -88,7 +88,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.incrementPostScore(post.id, 5);
       await storage.incrementUserScore(userId, 5);
       
-      res.json(post);
+      // Get the user information to return PostWithUser
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      const postWithUser = {
+        ...post,
+        user
+      };
+      
+      res.json(postWithUser);
     } catch (error) {
       if (error instanceof z.ZodError) {
         res.status(400).json({ message: "Invalid post data", errors: error.errors });

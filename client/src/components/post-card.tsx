@@ -53,6 +53,11 @@ export default function PostCard({ post, currentUser, compact = false }: PostCar
 
   const timeAgo = formatDistanceToNow(new Date(post.createdAt), { addSuffix: true });
 
+  // Safety check for user data
+  if (!post.user) {
+    return null;
+  }
+
   if (compact) {
     return (
       <div className="flex items-start space-x-3">
