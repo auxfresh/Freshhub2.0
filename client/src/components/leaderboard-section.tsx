@@ -102,7 +102,7 @@ export default function LeaderboardSection({ currentUser }: LeaderboardSectionPr
             
             return (
               <div 
-                key={user.id} 
+                key={`leaderboard-${user.id}`} 
                 className={`p-4 hover:bg-gray-50 transition-colors ${
                   isCurrentUser ? "bg-blue-50 border-l-4 border-social-primary" : ""
                 }`}

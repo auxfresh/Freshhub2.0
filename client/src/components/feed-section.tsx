@@ -150,7 +150,7 @@ export default function FeedSection({ currentUser }: FeedSectionProps) {
           </div>
         ) : (
           posts.map((post) => (
-            <PostCard key={post.id} post={post} currentUser={currentUser} />
+            <PostCard key={`post-${post.id}`} post={post} currentUser={currentUser} />
           ))
         )}
       </div>

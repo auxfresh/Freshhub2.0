@@ -62,7 +62,7 @@ export default function PostCard({ post, currentUser, compact = false }: PostCar
     return (
       <div className="flex items-start space-x-3">
         <img 
-          src={avatarUrls[post.user.avatar as keyof typeof avatarUrls] || avatarUrls["2"]} 
+          src={avatarUrls[post.user?.avatar as keyof typeof avatarUrls] || avatarUrls["2"]} 
           alt="User avatar" 
           className="w-10 h-10 rounded-full"
         />
@@ -100,7 +100,7 @@ export default function PostCard({ post, currentUser, compact = false }: PostCar
       <div className="p-6">
         <div className="flex items-center mb-4">
           <img 
-            src={avatarUrls[post.user.avatar as keyof typeof avatarUrls] || avatarUrls["2"]} 
+            src={avatarUrls[post.user?.avatar as keyof typeof avatarUrls] || avatarUrls["2"]} 
             alt="User avatar" 
             className="w-12 h-12 rounded-full mr-3"
           />
@@ -109,9 +109,9 @@ export default function PostCard({ post, currentUser, compact = false }: PostCar
             <p className="text-sm text-social-secondary">{timeAgo}</p>
           </div>
         </div>
-        
+
         <p className="text-gray-800 mb-4">{post.content}</p>
-        
+
         {post.imageUrl && (
           <img 
             src={post.imageUrl} 
@@ -119,7 +119,7 @@ export default function PostCard({ post, currentUser, compact = false }: PostCar
             className="w-full h-64 object-cover rounded-lg mb-4"
           />
         )}
-        
+
         <div className="flex items-center justify-between pt-4 border-t border-gray-100">
           <div className="flex space-x-6">
             <button 
