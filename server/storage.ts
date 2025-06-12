@@ -1,4 +1,3 @@
-
 import { database } from './firebase';
 import { ref, set, get, push, update, orderByChild, query, limitToFirst } from 'firebase/database';
 import { users, posts, type User, type InsertUser, type Post, type InsertPost, type UpdateUser, type PostWithUser } from "@shared/schema";
@@ -10,7 +9,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: number, user: UpdateUser): Promise<User | undefined>;
   getLeaderboard(): Promise<User[]>;
-  
+
   // Post operations
   createPost(userId: number, post: InsertPost): Promise<Post>;
   getPosts(): Promise<PostWithUser[]>;
@@ -32,8 +31,8 @@ export class FirebaseStorage implements IStorage {
     // Check if users already exist
     const usersRef = ref(database, 'communityUsers');
     const snapshot = await get(usersRef);
-    
-    if (!snapshot.exists()) {
+
+    if (!snapshot.exists() || Object.keys(snapshot.val() || {}).length === 0) {
       const sampleUsers = [
         { username: "Mike Chen", bio: "Frontend Developer", avatar: "2", score: 1456, postsCount: 24, followersCount: 892, followingCount: 156 },
         { username: "Sarah Johnson", bio: "UX Designer", avatar: "1", score: 1247, postsCount: 18, followersCount: 743, followingCount: 234 },
@@ -63,10 +62,10 @@ export class FirebaseStorage implements IStorage {
   private async updateCounters() {
     const userCounterRef = ref(database, 'counters/userId');
     const postCounterRef = ref(database, 'counters/postId');
-    
+
     const userCounterSnapshot = await get(userCounterRef);
     const postCounterSnapshot = await get(postCounterRef);
-    
+
     this.userIdCounter = userCounterSnapshot.exists() ? userCounterSnapshot.val() : 1;
     this.postIdCounter = postCounterSnapshot.exists() ? postCounterSnapshot.val() : 1;
   }
@@ -80,19 +79,19 @@ export class FirebaseStorage implements IStorage {
   async getUserByUsername(username: string): Promise<User | undefined> {
     const usersRef = ref(database, 'communityUsers');
     const snapshot = await get(usersRef);
-    
+
     if (snapshot.exists()) {
       const users = snapshot.val();
       const userEntry = Object.entries(users).find(([_, user]: [string, any]) => user.username === username);
       return userEntry ? userEntry[1] as User : undefined;
     }
-    
+
     return undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
     await this.updateCounters();
-    
+
     const id = this.userIdCounter++;
     const user: User = {
       id,
@@ -107,7 +106,7 @@ export class FirebaseStorage implements IStorage {
 
     await set(ref(database, `communityUsers/${id}`), user);
     await set(ref(database, 'counters/userId'), this.userIdCounter);
-    
+
     return user;
   }
 
@@ -127,20 +126,20 @@ export class FirebaseStorage implements IStorage {
   async getLeaderboard(): Promise<User[]> {
     const usersRef = ref(database, 'communityUsers');
     const snapshot = await get(usersRef);
-    
+
     if (snapshot.exists()) {
       const users = snapshot.val();
       return Object.values(users)
         .sort((a: any, b: any) => b.score - a.score)
         .slice(0, 20) as User[];
     }
-    
+
     return [];
   }
 
   async createPost(userId: number, insertPost: InsertPost): Promise<Post> {
     await this.updateCounters();
-    
+
     const id = this.postIdCounter++;
     const post: Post = {
       id,
@@ -173,7 +172,7 @@ export class FirebaseStorage implements IStorage {
   async getPosts(): Promise<PostWithUser[]> {
     const postsRef = ref(database, 'posts');
     const usersRef = ref(database, 'communityUsers');
-    
+
     const [postsSnapshot, usersSnapshot] = await Promise.all([
       get(postsRef),
       get(usersRef)
@@ -202,14 +201,14 @@ export class FirebaseStorage implements IStorage {
   async getUserPosts(userId: number): Promise<PostWithUser[]> {
     const postsRef = ref(database, 'posts');
     const snapshot = await get(postsRef);
-    
+
     if (!snapshot.exists()) {
       return [];
     }
 
     const posts = snapshot.val();
     const user = await this.getUser(userId);
-    
+
     if (!user) {
       return [];
     }
@@ -232,7 +231,7 @@ export class FirebaseStorage implements IStorage {
   async likePost(postId: number, userId: number): Promise<Post | undefined> {
     const postRef = ref(database, `posts/${postId}`);
     const likesRef = ref(database, `postLikes/${postId}/${userId}`);
-    
+
     const [postSnapshot, likeSnapshot] = await Promise.all([
       get(postRef),
       get(likesRef)
@@ -244,9 +243,9 @@ export class FirebaseStorage implements IStorage {
       ...postSnapshot.val(),
       createdAt: new Date(postSnapshot.val().createdAt),
     } as Post;
-    
+
     const isLiked = likeSnapshot.exists();
-    
+
     if (isLiked) {
       // Unlike
       await set(likesRef, null);
@@ -255,7 +254,7 @@ export class FirebaseStorage implements IStorage {
       // Like
       await set(likesRef, true);
       post.likes += 1;
-      
+
       // Award points for engagement
       await this.incrementPostScore(postId, 1);
       await this.incrementUserScore(post.userId, 1);
@@ -265,14 +264,14 @@ export class FirebaseStorage implements IStorage {
       ...post,
       createdAt: post.createdAt.toISOString(),
     });
-    
+
     return post;
   }
 
   async incrementPostScore(postId: number, points: number): Promise<void> {
     const postRef = ref(database, `posts/${postId}`);
     const snapshot = await get(postRef);
-    
+
     if (snapshot.exists()) {
       const post = snapshot.val();
       post.score += points;
@@ -283,7 +282,7 @@ export class FirebaseStorage implements IStorage {
   async incrementUserScore(userId: number, points: number): Promise<void> {
     const userRef = ref(database, `communityUsers/${userId}`);
     const snapshot = await get(userRef);
-    
+
     if (snapshot.exists()) {
       const user = snapshot.val();
       user.score += points;

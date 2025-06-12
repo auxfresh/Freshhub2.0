@@ -13,7 +13,7 @@ const avatarUrls = {
 };
 
 export default function LeaderboardSection({ currentUser }: LeaderboardSectionProps) {
-  const { data: leaderboard = [], isLoading } = useQuery<User[]>({
+  const { data: leaderboard = [], isLoading, error } = useQuery<User[]>({
     queryKey: ["/api/leaderboard"],
   });
 
@@ -26,9 +26,34 @@ export default function LeaderboardSection({ currentUser }: LeaderboardSectionPr
     );
   }
 
-  const topThree = leaderboard.slice(0, 3);
-  const remaining = leaderboard.slice(3);
-  const currentUserRank = leaderboard.findIndex(user => user.id === currentUser.id) + 1;
+  if (error) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <span className="text-red-500">Error loading leaderboard</span>
+      </div>
+    );
+  }
+
+  // Filter out any invalid entries and ensure we have valid user objects
+  const validUsers = leaderboard.filter(user => user && user.id && user.username);
+  
+  if (validUsers.length === 0) {
+    return (
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="p-6 border-b border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Leaderboard</h2>
+          <p className="text-social-secondary">Top performers this month</p>
+        </div>
+        <div className="p-8 text-center">
+          <p className="text-social-secondary">No users found on the leaderboard yet.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const topThree = validUsers.slice(0, 3);
+  const remaining = validUsers.slice(3);
+  const currentUserRank = validUsers.findIndex(user => user?.id === currentUser?.id) + 1;
 
   return (
     <section>
