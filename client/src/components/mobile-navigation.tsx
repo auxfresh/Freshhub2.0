@@ -7,18 +7,15 @@ interface MobileNavigationProps {
 
 export default function MobileNavigation({ activeSection, onSectionChange }: MobileNavigationProps) {
   const navItems = [
-    { id: "feed", label: "Home", icon: Home },
-    { id: "leaderboard", label: "Standings", icon: Trophy },
-    { id: "profile", label: "Community", icon: Users },
-    { id: "more", label: "More", icon: MoreHorizontal },
+    { id: "feed", label: "Home", icon: Home, href: "dashboard.html" },
+    { id: "leaderboard", label: "Standings", icon: Trophy, href: "standings.html" },
+    { id: "profile", label: "Community", icon: Users, href: "blog.html" },
+    { id: "more", label: "More", icon: MoreHorizontal, href: "more.html" },
   ] as const;
 
-  const handleNavClick = (itemId: string) => {
-    if (itemId === "more") {
-      // Handle more section - could open a menu or navigate to settings
-      return;
-    }
-    onSectionChange(itemId as "feed" | "leaderboard" | "profile");
+  const handleNavClick = (item: typeof navItems[number]) => {
+    // Navigate to external HTML page
+    window.location.href = item.href;
   };
 
   return (
@@ -31,7 +28,7 @@ export default function MobileNavigation({ activeSection, onSectionChange }: Mob
           return (
             <button
               key={item.id}
-              onClick={() => handleNavClick(item.id)}
+              onClick={() => handleNavClick(item)}
               className={`flex flex-col items-center py-2 px-4 transition-colors ${
                 isActive 
                   ? "text-social-primary" 
