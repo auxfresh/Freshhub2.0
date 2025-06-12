@@ -1,8 +1,9 @@
-import { Bell } from "lucide-react";
-import type { User } from "@shared/schema";
+import { useState } from "react";
+import { Bell, Menu, X, User } from "lucide-react";
+import type { User as UserType } from "@shared/schema";
 
 interface HeaderProps {
-  currentUser: User;
+  currentUser: UserType;
   activeSection: "feed" | "leaderboard" | "profile";
   onSectionChange: (section: "feed" | "leaderboard" | "profile") => void;
 }
@@ -14,14 +15,18 @@ const avatarUrls = {
 };
 
 export default function Header({ currentUser, activeSection, onSectionChange }: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const navItems = [
     { id: "feed", label: "Feed", icon: "fas fa-home" },
     { id: "leaderboard", label: "Leaderboard", icon: "fas fa-trophy" },
     { id: "profile", label: "Profile", icon: "fas fa-user" },
   ] as const;
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-4">
@@ -49,10 +54,38 @@ export default function Header({ currentUser, activeSection, onSectionChange }: 
             <button className="p-2 text-social-secondary hover:text-social-primary transition-colors">
               <Bell className="w-5 h-5" />
             </button>
+            
+            {/* Hamburger Menu */}
+            <div className="relative">
+              <button
+                onClick={toggleMenu}
+                className="p-2 text-social-secondary hover:text-social-primary transition-colors"
+              >
+                {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+              
+              {/* Dropdown Menu */}
+              {isMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                  <button
+                    onClick={() => {
+                      onSectionChange("profile");
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
+                  >
+                    <User className="w-4 h-4" />
+                    <span>My Profile</span>
+                  </button>
+                </div>
+              )}
+            </div>
+            
             <img 
               src={avatarUrls[currentUser.avatar as keyof typeof avatarUrls] || avatarUrls["2"]} 
               alt="User avatar" 
-              className="w-8 h-8 rounded-full"
+              className="w-8 h-8 rounded-full cursor-pointer"
+              onClick={() => onSectionChange("profile")}
             />
           </div>
         </div>

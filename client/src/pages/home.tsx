@@ -73,7 +73,7 @@ export default function Home() {
         onSectionChange={setActiveSection}
       />
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-20 md:pb-6">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-20">
         {activeSection === "feed" && <FeedSection currentUser={currentUser} />}
         {activeSection === "leaderboard" && <LeaderboardSection currentUser={currentUser} />}
         {activeSection === "profile" && (

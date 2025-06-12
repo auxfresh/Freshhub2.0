@@ -67,7 +67,9 @@ export class MemStorage implements IStorage {
     const id = this.userIdCounter++;
     const user: User = {
       id,
-      ...insertUser,
+      username: insertUser.username,
+      bio: insertUser.bio || "",
+      avatar: insertUser.avatar || "1",
       score: 0,
       postsCount: 0,
       followersCount: 0,
@@ -100,7 +102,8 @@ export class MemStorage implements IStorage {
     const post: Post = {
       id,
       userId,
-      ...insertPost,
+      content: insertPost.content,
+      imageUrl: insertPost.imageUrl || null,
       likes: 0,
       comments: 0,
       score: 0,

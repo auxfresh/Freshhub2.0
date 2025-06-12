@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import PostCard from "./post-card";
+import LeaderboardSection from "./leaderboard-section";
 import { Image, Smile, Loader2 } from "lucide-react";
 
 interface FeedSectionProps {
@@ -134,6 +135,11 @@ export default function FeedSection({ currentUser }: FeedSectionProps) {
             </div>
           </form>
         </Form>
+      </div>
+
+      {/* Leaderboard */}
+      <div className="mb-6">
+        <LeaderboardSection currentUser={currentUser} />
       </div>
 
       {/* Posts Feed */}
