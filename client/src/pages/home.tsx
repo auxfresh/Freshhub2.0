@@ -13,14 +13,35 @@ export default function Home() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [showRegistration, setShowRegistration] = useState(true);
 
-  // Check if user exists in localStorage
+  // Check if user exists in localStorage and verify with backend
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
     if (savedUser) {
       try {
         const user = JSON.parse(savedUser);
-        setCurrentUser(user);
-        setShowRegistration(false);
+        // Verify user exists in backend
+        fetch(`/api/users/${user.id}`)
+          .then(res => {
+            if (res.ok) {
+              return res.json();
+            } else {
+              // User doesn't exist in backend, clear localStorage and show registration
+              localStorage.removeItem("currentUser");
+              setShowRegistration(true);
+              return null;
+            }
+          })
+          .then(backendUser => {
+            if (backendUser) {
+              setCurrentUser(backendUser);
+              setShowRegistration(false);
+            }
+          })
+          .catch(error => {
+            console.error("Failed to verify user:", error);
+            localStorage.removeItem("currentUser");
+            setShowRegistration(true);
+          });
       } catch (error) {
         console.error("Failed to parse saved user:", error);
         localStorage.removeItem("currentUser");
