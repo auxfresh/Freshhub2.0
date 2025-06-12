@@ -7,7 +7,7 @@ const firebaseConfig = {
   authDomain: "fresh-hub-d509f.firebaseapp.com",
   databaseURL: "https://fresh-hub-d509f-default-rtdb.firebaseio.com",
   projectId: "fresh-hub-d509f",
-  storageBucket: "fresh-hub-d509f.firebasestorage.app",
+  storageBucket: "fresh-hub-d509f.appspot.com",
   messagingSenderId: "101887757266",
   appId: "1:101887757266:web:80c054959f6588771fd60b"
 };
