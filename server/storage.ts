@@ -22,9 +22,14 @@ export interface IStorage {
 export class FirebaseStorage implements IStorage {
   private userIdCounter: number = 1;
   private postIdCounter: number = 1;
+  private initPromise: Promise<void>;
 
   constructor() {
-    this.initializeSampleData();
+    this.initPromise = this.initializeSampleData();
+  }
+
+  private async ensureInitialized() {
+    await this.initPromise;
   }
 
   private async initializeSampleData() {
@@ -32,8 +37,13 @@ export class FirebaseStorage implements IStorage {
       // Check if users already exist
       const usersRef = ref(database, 'communityUsers');
       const snapshot = await get(usersRef);
+      const existingUsers = snapshot.exists() ? snapshot.val() : {};
+      const userCount = Object.keys(existingUsers || {}).length;
 
-      if (!snapshot.exists() || Object.keys(snapshot.val() || {}).length === 0) {
+      console.log(`Found ${userCount} existing users`);
+
+      // Only initialize if we have fewer than 5 users
+      if (userCount < 5) {
         const sampleUsers = [
           { username: "Mike Chen", bio: "Frontend Developer", avatar: "2", score: 1456, postsCount: 24, followersCount: 892, followingCount: 156 },
           { username: "Sarah Johnson", bio: "UX Designer", avatar: "1", score: 1247, postsCount: 18, followersCount: 743, followingCount: 234 },
@@ -45,21 +55,35 @@ export class FirebaseStorage implements IStorage {
         // Get the current max user ID
         await this.updateCounters();
 
+        console.log('Creating sample users...');
         for (const userData of sampleUsers) {
-          const user: User = {
-            id: this.userIdCounter++,
-            ...userData,
-            followersCount: userData.followersCount,
-            followingCount: userData.followingCount,
-          };
-          await set(ref(database, `communityUsers/${user.id}`), user);
+          // Check if user already exists by username
+          const existingUser = Object.values(existingUsers || {}).find((user: any) => user.username === userData.username);
+          
+          if (!existingUser) {
+            const user: User = {
+              id: this.userIdCounter++,
+              ...userData,
+              followersCount: userData.followersCount,
+              followingCount: userData.followingCount,
+            };
+            await set(ref(database, `communityUsers/${user.id}`), user);
+            console.log(`Created user: ${user.username} with ID: ${user.id}`);
+          } else {
+            console.log(`User ${userData.username} already exists`);
+          }
         }
 
         // Update the counter
         await set(ref(database, 'counters/userId'), this.userIdCounter);
-        console.log('Sample data initialized successfully');
+        console.log('Sample data initialization completed');
+        
+        // Verify the data was created
+        const verifySnapshot = await get(usersRef);
+        const finalUserCount = Object.keys(verifySnapshot.val() || {}).length;
+        console.log(`Final user count: ${finalUserCount}`);
       } else {
-        console.log('Sample data already exists');
+        console.log('Sample data already complete with 5+ users');
       }
     } catch (error) {
       console.error('Error initializing sample data:', error);
@@ -131,16 +155,22 @@ export class FirebaseStorage implements IStorage {
   }
 
   async getLeaderboard(): Promise<User[]> {
+    await this.ensureInitialized();
+    
     const usersRef = ref(database, 'communityUsers');
     const snapshot = await get(usersRef);
 
     if (snapshot.exists()) {
       const users = snapshot.val();
-      return Object.values(users)
+      const leaderboard = Object.values(users)
         .sort((a: any, b: any) => b.score - a.score)
         .slice(0, 20) as User[];
+      
+      console.log(`Returning leaderboard with ${leaderboard.length} users`);
+      return leaderboard;
     }
 
+    console.log('No users found in Firebase for leaderboard');
     return [];
   }
 
