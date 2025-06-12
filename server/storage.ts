@@ -28,34 +28,41 @@ export class FirebaseStorage implements IStorage {
   }
 
   private async initializeSampleData() {
-    // Check if users already exist
-    const usersRef = ref(database, 'communityUsers');
-    const snapshot = await get(usersRef);
+    try {
+      // Check if users already exist
+      const usersRef = ref(database, 'communityUsers');
+      const snapshot = await get(usersRef);
 
-    if (!snapshot.exists() || Object.keys(snapshot.val() || {}).length === 0) {
-      const sampleUsers = [
-        { username: "Mike Chen", bio: "Frontend Developer", avatar: "2", score: 1456, postsCount: 24, followersCount: 892, followingCount: 156 },
-        { username: "Sarah Johnson", bio: "UX Designer", avatar: "1", score: 1247, postsCount: 18, followersCount: 743, followingCount: 234 },
-        { username: "Emma Rodriguez", bio: "Full Stack Developer", avatar: "3", score: 1089, postsCount: 31, followersCount: 567, followingCount: 189 },
-        { username: "Alex Thompson", bio: "Product Manager", avatar: "2", score: 967, postsCount: 15, followersCount: 432, followingCount: 98 },
-        { username: "Jessica Wilson", bio: "Data Scientist", avatar: "1", score: 834, postsCount: 22, followersCount: 321, followingCount: 167 },
-      ];
+      if (!snapshot.exists() || Object.keys(snapshot.val() || {}).length === 0) {
+        const sampleUsers = [
+          { username: "Mike Chen", bio: "Frontend Developer", avatar: "2", score: 1456, postsCount: 24, followersCount: 892, followingCount: 156 },
+          { username: "Sarah Johnson", bio: "UX Designer", avatar: "1", score: 1247, postsCount: 18, followersCount: 743, followingCount: 234 },
+          { username: "Emma Rodriguez", bio: "Full Stack Developer", avatar: "3", score: 1089, postsCount: 31, followersCount: 567, followingCount: 189 },
+          { username: "Alex Thompson", bio: "Product Manager", avatar: "2", score: 967, postsCount: 15, followersCount: 432, followingCount: 98 },
+          { username: "Jessica Wilson", bio: "Data Scientist", avatar: "1", score: 834, postsCount: 22, followersCount: 321, followingCount: 167 },
+        ];
 
-      // Get the current max user ID
-      await this.updateCounters();
+        // Get the current max user ID
+        await this.updateCounters();
 
-      for (const userData of sampleUsers) {
-        const user: User = {
-          id: this.userIdCounter++,
-          ...userData,
-          followersCount: userData.followersCount,
-          followingCount: userData.followingCount,
-        };
-        await set(ref(database, `communityUsers/${user.id}`), user);
+        for (const userData of sampleUsers) {
+          const user: User = {
+            id: this.userIdCounter++,
+            ...userData,
+            followersCount: userData.followersCount,
+            followingCount: userData.followingCount,
+          };
+          await set(ref(database, `communityUsers/${user.id}`), user);
+        }
+
+        // Update the counter
+        await set(ref(database, 'counters/userId'), this.userIdCounter);
+        console.log('Sample data initialized successfully');
+      } else {
+        console.log('Sample data already exists');
       }
-
-      // Update the counter
-      await set(ref(database, 'counters/userId'), this.userIdCounter);
+    } catch (error) {
+      console.error('Error initializing sample data:', error);
     }
   }
 

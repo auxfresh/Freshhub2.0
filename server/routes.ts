@@ -65,9 +65,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/leaderboard", async (req, res) => {
     try {
+      console.log('Leaderboard route called');
       const leaderboard = await storage.getLeaderboard();
+      console.log('Leaderboard response:', leaderboard.length, 'users');
       res.json(leaderboard);
     } catch (error) {
+      console.error('Error in leaderboard route:', error);
       res.status(500).json({ message: "Failed to get leaderboard" });
     }
   });

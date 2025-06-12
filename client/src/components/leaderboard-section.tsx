@@ -15,7 +15,13 @@ const avatarUrls = {
 export default function LeaderboardSection({ currentUser }: LeaderboardSectionProps) {
   const { data: leaderboard = [], isLoading, error } = useQuery<User[]>({
     queryKey: ["/api/leaderboard"],
+    staleTime: 30000, // 30 seconds
+    refetchOnMount: true,
   });
+
+  console.log('Leaderboard data:', leaderboard);
+  console.log('Leaderboard loading:', isLoading);
+  console.log('Leaderboard error:', error);
 
   if (isLoading) {
     return (
