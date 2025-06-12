@@ -55,7 +55,7 @@ export default function LeaderboardSection({ currentUser }: LeaderboardSectionPr
                   </div>
                 </div>
                 <p className="font-semibold text-sm">{topThree[1]?.username}</p>
-                <p className="text-xs text-social-secondary">{topThree[1]?.score.toLocaleString()} pts</p>
+                <p className="text-xs text-social-secondary">{topThree[1]?.score?.toLocaleString() || '0'} pts</p>
               </div>
               
               {/* 1st Place */}
@@ -72,7 +72,7 @@ export default function LeaderboardSection({ currentUser }: LeaderboardSectionPr
                   <Crown className="absolute -top-2 left-1/2 transform -translate-x-1/2 text-yellow-400 w-6 h-6" />
                 </div>
                 <p className="font-semibold">{topThree[0]?.username}</p>
-                <p className="text-sm text-social-secondary">{topThree[0]?.score.toLocaleString()} pts</p>
+                <p className="text-sm text-social-secondary">{topThree[0]?.score?.toLocaleString() || '0'} pts</p>
               </div>
               
               {/* 3rd Place */}
@@ -88,7 +88,7 @@ export default function LeaderboardSection({ currentUser }: LeaderboardSectionPr
                   </div>
                 </div>
                 <p className="font-semibold text-sm">{topThree[2]?.username}</p>
-                <p className="text-xs text-social-secondary">{topThree[2]?.score.toLocaleString()} pts</p>
+                <p className="text-xs text-social-secondary">{topThree[2]?.score?.toLocaleString() || '0'} pts</p>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function LeaderboardSection({ currentUser }: LeaderboardSectionPr
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-gray-900">{user.score.toLocaleString()} pts</p>
+                    <p className="font-semibold text-gray-900">{user.score?.toLocaleString() || '0'} pts</p>
                     <p className="text-sm text-social-success">+{Math.floor(Math.random() * 50) + 10}</p>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export default function LeaderboardSection({ currentUser }: LeaderboardSectionPr
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-semibold text-gray-900">{currentUser.score.toLocaleString()} pts</p>
+                  <p className="font-semibold text-gray-900">{currentUser.score?.toLocaleString() || '0'} pts</p>
                   <p className="text-sm text-social-success">+{Math.floor(Math.random() * 30) + 5}</p>
                 </div>
               </div>
