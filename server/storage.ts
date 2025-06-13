@@ -45,11 +45,11 @@ export class FirebaseStorage implements IStorage {
       // Only initialize if we have fewer than 5 users
       if (userCount < 5) {
         const sampleUsers = [
-          { username: "Mike Chen", bio: "Frontend Developer", avatar: "2", score: 1456, postsCount: 24, followersCount: 892, followingCount: 156 },
-          { username: "Sarah Johnson", bio: "UX Designer", avatar: "1", score: 1247, postsCount: 18, followersCount: 743, followingCount: 234 },
-          { username: "Emma Rodriguez", bio: "Full Stack Developer", avatar: "3", score: 1089, postsCount: 31, followersCount: 567, followingCount: 189 },
-          { username: "Alex Thompson", bio: "Product Manager", avatar: "2", score: 967, postsCount: 15, followersCount: 432, followingCount: 98 },
-          { username: "Jessica Wilson", bio: "Data Scientist", avatar: "1", score: 834, postsCount: 22, followersCount: 321, followingCount: 167 },
+          { username: "Fresh Hub Ai", bio: "Frontend Developer", avatar: "2", score: 1456, postsCount: 24, followersCount: 892, followingCount: 156 },
+          { username: "Fresh Hub Ai", bio: "UX Designer", avatar: "1", score: 1247, postsCount: 18, followersCount: 743, followingCount: 234 },
+          { username: "Fresh Hub Ai", bio: "Full Stack Developer", avatar: "3", score: 1089, postsCount: 31, followersCount: 567, followingCount: 189 },
+          { username: "Fresh Hub Ai", bio: "Product Manager", avatar: "2", score: 967, postsCount: 15, followersCount: 432, followingCount: 98 },
+          { username: "Fresh Hub Ai", bio: "Data Scientist", avatar: "1", score: 834, postsCount: 22, followersCount: 321, followingCount: 167 },
         ];
 
         // Get the current max user ID
