@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0, 0%, 100%);
+  --background: hsl(271 41% 10%);
   --foreground: hsl(20, 14.3%, 4.1%);
   --muted: hsl(60, 4.8%, 95.9%);
   --muted-foreground: hsl(25, 5.3%, 44.7%);
@@ -29,7 +29,7 @@
   --social-secondary: hsl(203, 20%, 46%);
   --social-accent: hsl(199, 83%, 49%);
   --social-success: hsl(152, 100%, 36%);
-  --social-background: hsl(202, 23%, 97%);
+  --social-background:hsl(271 41% 10%);
 }
 
 .dark {
