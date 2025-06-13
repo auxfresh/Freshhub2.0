@@ -26,13 +26,16 @@ export default function Header({ currentUser, activeSection, onSectionChange }: 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="bg-honeyflower border-b border-gray-200 sticky top-0 z-50">
+    // The change is here: bg-honeyflower is replaced with bg-[#4d2e6b]
+    <header className="bg-[#4d2e6b] border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-4">
+            {/* You might want to change this text color to white or a lighter color
+                to ensure visibility against the new dark background */}
             <h1 className="text-xl font-bold text-gray-900">Fresh Hub</h1>
           </div>
-          
+
           <nav className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <button
@@ -54,7 +57,7 @@ export default function Header({ currentUser, activeSection, onSectionChange }: 
             <button className="p-2 text-social-secondary hover:text-social-primary transition-colors">
               <Bell className="w-5 h-5" />
             </button>
-            
+
             {/* Hamburger Menu */}
             <div className="relative">
               <button
@@ -63,7 +66,7 @@ export default function Header({ currentUser, activeSection, onSectionChange }: 
               >
                 {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
-              
+
               {/* Dropdown Menu */}
               {isMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
@@ -80,7 +83,7 @@ export default function Header({ currentUser, activeSection, onSectionChange }: 
                 </div>
               )}
             </div>
-            
+
             <img 
               src={avatarUrls[currentUser.avatar as keyof typeof avatarUrls] || avatarUrls["2"]} 
               alt="User avatar" 
