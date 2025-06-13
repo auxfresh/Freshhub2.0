@@ -2,57 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light Mode (Default - you might not see this much if your app is primarily dark) */
 :root {
-  --background: #FFFFFF; /* hsl(0, 0%, 100%) */
-  --foreground: #100C0A; /* hsl(20, 14.3%, 4.1%) */
-  --muted: #F5F5F4; /* hsl(60, 4.8%, 95.9%) */
-  --muted-foreground: #7C7368; /* hsl(25, 5.3%, 44.7%) */
-  --popover: #FFFFFF; /* hsl(0, 0%, 100%) */
-  --popover-foreground: #100C0A; /* hsl(20, 14.3%, 4.1%) */
-  --card: #FFFFFF; /* hsl(0, 0%, 100%) */
-  --card-foreground: #100C0A; /* hsl(20, 14.3%, 4.1%) */
-  --border: #E6E1DC; /* hsl(20, 5.9%, 90%) */
-  --input: #E6E1DC; /* hsl(20, 5.9%, 90%) */
-  --primary: #3483DB; /* hsl(207, 90%, 54%) */
-  --primary-foreground: #F8FCFF; /* hsl(211, 100%, 99%) */
-  --secondary: #F5F5F4; /* hsl(60, 4.8%, 95.9%) */
-  --secondary-foreground: #1A1816; /* hsl(24, 9.8%, 10%) */
-  --accent: #F5F5F4; /* hsl(60, 4.8%, 95.9%) */
-  --accent-foreground: #1A1816; /* hsl(24, 9.8%, 10%) */
-  --destructive: #CC3333; /* hsl(0, 84.2%, 60.2%) - adjusted from 60.2% to 60% for exact hex */
-  --destructive-foreground: #F9F9F8; /* hsl(60, 9.1%, 97.8%) */
-  --ring: #100C0A; /* hsl(20, 14.3%, 4.1%) */
+  --background: #FFFFFF; /* White */
+  --foreground: #100C0A; /* Very dark brown/black */
+  --muted: #F5F5F4;      /* Light gray */
+  --muted-foreground: #7C7368; /* Muted brown */
+  --popover: #FFFFFF;
+  --popover-foreground: #100C0A;
+  --card: #FFFFFF;
+  --card-foreground: #100C0A;
+  --border: #E6E1DC;     /* Light border gray */
+  --input: #E6E1DC;
+  --primary: #3483DB;    /* Default Blue - kept for general primary in light mode */
+  --primary-foreground: #F8FCFF;
+  --secondary: #F5F5F4;
+  --secondary-foreground: #1A1816;
+  --accent: #F5F5F4;
+  --accent-foreground: #1A1816;
+  --destructive: #CC3333; /* Red */
+  --destructive-foreground: #F9F9F8;
+  --ring: #100C0A;
   --radius: 0.5rem;
 
-  /* Custom colors matching design */
-  --social-primary: #089DD8; /* hsl(199, 89%, 48%) */
-  --social-secondary: #657D8A; /* hsl(203, 20%, 46%) */
-  --social-accent: #0C9BD1; /* hsl(199, 83%, 49%) */
-  --social-success: #00B336; /* hsl(152, 100%, 36%) */
-  --social-background: #F0F3F5; /* hsl(202, 23%, 97%) */
+  /* Custom 'social' colors - these will also be overridden in dark mode below */
+  --social-primary: #089DD8; /* Default social blue */
+  --social-secondary: #657D8A; /* Default social gray */
+  --social-accent: #0C9BD1;
+  --social-success: #00B336; /* Default social green */
+  --social-background: #F0F3F5; /* Light background for social elements */
 }
 
+/* Dark Mode - Match the Dashboard Image */
 .dark {
-  --background: #0A0A0B; /* hsl(240, 10%, 3.9%) */
-  --foreground: #FAFAFA; /* hsl(0, 0%, 98%) */
-  --muted: #29292D; /* hsl(240, 3.7%, 15.9%) */
-  --muted-foreground: #A6A6AC; /* hsl(240, 5%, 64.9%) */
-  --popover: #0A0A0B; /* hsl(240, 10%, 3.9%) */
-  --popover-foreground: #FAFAFA; /* hsl(0, 0%, 98%) */
-  --card: #0A0A0B; /* hsl(240, 10%, 3.9%) */
-  --card-foreground: #FAFAFA; /* hsl(0, 0%, 98%) */
-  --border: #29292D; /* hsl(240, 3.7%, 15.9%) */
-  --input: #29292D; /* hsl(240, 3.7%, 15.9%) */
-  --primary: #3483DB; /* hsl(207, 90%, 54%) */
-  --primary-foreground: #F8FCFF; /* hsl(211, 100%, 99%) */
-  --secondary: #29292D; /* hsl(240, 3.7%, 15.9%) */
-  --secondary-foreground: #FAFAFA; /* hsl(0, 0%, 98%) */
-  --accent: #29292D; /* hsl(240, 3.7%, 15.9%) */
-  --accent-foreground: #FAFAFA; /* hsl(0, 0%, 98%) */
-  --destructive: #882B2B; /* hsl(0, 62.8%, 30.6%) - adjusted from 30.6% to 30% for exact hex */
-  --destructive-foreground: #FAFAFA; /* hsl(0, 0%, 98%) */
-  --ring: #D6D6DA; /* hsl(240, 4.9%, 83.9%) */
+  --background: #1F1133; /* Deep Purple Background - Matches your app's main background */
+  --foreground: #FAFAFA; /* White/Off-white text */
+  --muted: #332152;      /* Slightly lighter purple for muted elements */
+  --muted-foreground: #A6A6AC; /* Muted gray for secondary text */
+  --popover: #1F1133;
+  --popover-foreground: #FAFAFA;
+  --card: #2B1D47;       /* Slightly lighter purple for cards/containers */
+  --card-foreground: #FAFAFA;
+  --border: #3A295C;     /* Border color, slightly different shade of purple */
+  --input: #3A295C;
+  --primary: #5A2D9B;    /* Main Brand Purple - Matches top bar/buttons */
+  --primary-foreground: #FAFAFA; /* White text on primary */
+  --secondary: #332152;  /* Use muted color for secondary, or adjust as needed */
+  --secondary-foreground: #FAFAFA;
+  --accent: #332152;
+  --accent-foreground: #FAFAFA;
+  --destructive: #E03B4C; /* Red for destructive actions */
+  --destructive-foreground: #FAFAFA;
+  --ring: #9C89B8;       /* Lighter purple for focus rings */
   --radius: 0.5rem;
+
+  /* Custom 'social' colors adjusted for dark theme (matching the app's visual style) */
+  --social-primary: #5A2D9B;    /* Deep Purple - Use brand primary for social primary */
+  --social-secondary: #FAFAFA;   /* White/Off-white for contrast on dark */
+  --social-accent: #5A2D9B;     /* Deep Purple */
+  --social-success: #36D66B;   /* Brighter Green for success, matches score in image */
+  --social-background: #1F1133; /* Main app background */
 }
 
 @layer base {
@@ -61,7 +70,8 @@
   }
 
   body {
-    background-color: #102F49; /* This was already in hex */
+    /* Ensure body uses the dark background from the .dark theme */
+    background-color: var(--background);
     @apply font-sans antialiased text-foreground;
     font-family: 'Inter', system-ui, sans-serif;
   }
@@ -85,22 +95,31 @@
   }
 
   .bg-social-background {
-    background-color: var(--social-background); /* Uses the HSL-converted hex now */
+    background-color: var(--social-background);
   }
 
+  /* This specific dark blue hex seems to be the main background in your app.
+     However, if you're using --background for the body, this might be redundant.
+     I've kept it in case you want to apply this specific shade elsewhere. */
   .bg-dark-blue {
-    background-color: #102F49; /* This was already in hex */
+    background-color: #102F49; /* Original dark blue - kept for reference if needed */
   }
 
   .border-social-primary {
     border-color: var(--social-primary);
   }
 
+  /* Adjust hover to be a slightly darker shade of the new primary purple */
   .hover\:bg-social-primary:hover {
-    background-color: #0891CC; /* Original HSL was hsl(199, 89%, 44%) */
+    background-color: #4C2686; /* Slightly darker purple for hover */
   }
 
   .hover\:text-social-primary:hover {
     color: var(--social-primary);
+  }
+
+  /* New utility for the green accent on scores/success */
+  .text-fresh-green {
+    color: #36D66B; /* Specific green from your dashboard scores */
   }
 }
