@@ -1,4 +1,4 @@
-import { Home, Trophy, Users, Menu } from "lucide-react";
+import { Home, Trophy, Users, MoreHorizontal} from "lucide-react";
 
 interface MobileNavigationProps {
   activeSection: "feed" | "leaderboard" | "profile";
