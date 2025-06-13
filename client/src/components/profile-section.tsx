@@ -18,9 +18,9 @@ interface ProfileSectionProps {
 }
 
 const avatarUrls = {
-  "1": "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200",
-  "2": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200",
-  "3": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200",
+  "1": "https://auxfresh.github.io/freshhub/avater1.jpg",
+  "2": "https://auxfresh.github.io/freshhub/avater2.jpg",
+  "3": "https://auxfresh.github.io/freshhub/avater3.jpg",
 };
 
 export default function ProfileSection({ currentUser, onUserUpdated }: ProfileSectionProps) {
