@@ -5,7 +5,7 @@
 /* Light Mode (Default - you might not see this much if your app is primarily dark) */
 :root {
   --background: #1a0f24; /* White */
-  --foreground: #100C0A; /* Very dark brown/black */
+  --foreground: #1a0f24; /* Very dark brown/black */
   --muted: #F5F5F4;      /* Light gray */
   --muted-foreground: #7C7368; /* Muted brown */
   --popover: #FFFFFF;
