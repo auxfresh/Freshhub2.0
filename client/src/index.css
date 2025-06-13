@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #4d2e6b; /* hsl(0, 0%, 100%) */
+  --background: #FFFFFF; /* hsl(0, 0%, 100%) */
   --foreground: #100C0A; /* hsl(20, 14.3%, 4.1%) */
   --muted: #F5F5F4; /* hsl(60, 4.8%, 95.9%) */
   --muted-foreground: #7C7368; /* hsl(25, 5.3%, 44.7%) */
-  --popover: #4d2e6b; /* hsl(0, 0%, 100%) */
+  --popover: #FFFFFF; /* hsl(0, 0%, 100%) */
   --popover-foreground: #100C0A; /* hsl(20, 14.3%, 4.1%) */
-  --card: #4d2e6b; /* hsl(0, 0%, 100%) */
+  --card: #FFFFFF; /* hsl(0, 0%, 100%) */
   --card-foreground: #100C0A; /* hsl(20, 14.3%, 4.1%) */
   --border: #E6E1DC; /* hsl(20, 5.9%, 90%) */
   --input: #E6E1DC; /* hsl(20, 5.9%, 90%) */
@@ -61,7 +61,7 @@
   }
 
   body {
-    background-color: #1a0f24; /* This was already in hex */
+    background-color: #102F49; /* This was already in hex */
     @apply font-sans antialiased text-foreground;
     font-family: 'Inter', system-ui, sans-serif;
   }
@@ -89,7 +89,7 @@
   }
 
   .bg-dark-blue {
-    background-color: #1a0f24; /* This was already in hex */
+    background-color: #102F49; /* This was already in hex */
   }
 
   .border-social-primary {
