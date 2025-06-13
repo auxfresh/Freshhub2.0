@@ -26,7 +26,7 @@
   --radius: 0.5rem;
 
   /* Custom 'social' colors - these will also be overridden in dark mode below */
-  --social-primary: #089DD8; /* Default social blue */
+  --social-primary: #4d2e6b; /* Default social blue */
   --social-secondary: #657D8A; /* Default social gray */
   --social-accent: #0C9BD1;
   --social-success: #00B336; /* Default social green */
