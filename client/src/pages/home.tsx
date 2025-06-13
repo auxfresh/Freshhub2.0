@@ -74,7 +74,8 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-social-background flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Welcome to SocialHub</h1>
+          <h1 className="text-2xl font-bold text-white mb-4">Welcome to Fresh-Hub Social Connect</h1>
+
           <button
             onClick={() => setShowRegistration(true)}
             className="bg-social-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-social-primary/90 transition-colors"
