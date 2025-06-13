@@ -61,8 +61,7 @@
   }
 
   body {
-    @apply font-sans antialiased bg-social-background text-foreground;background : #102F49 
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply font-sans antialiased bg-social-background text-foreground;font-family: 'Inter', system-ui, sans-serif;
   }
 }
 
@@ -84,7 +83,7 @@
   }
   
   .bg-social-background {
-    background-color: #102F49;
+    background-color: hsl(271 41% 10%);
   }
   
   .border-social-primary {
@@ -92,7 +91,7 @@
   }
   
   .hover\:bg-social-primary:hover {
-    background-color: hsl(199, 89%, 44%);
+    background-color: hsl(271 41% 10%);
   }
   
   .hover\:text-social-primary:hover {
