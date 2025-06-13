@@ -9,7 +9,7 @@ interface LeaderboardSectionProps {
 const avatarUrls = {
   "1": "https://auxfresh.github.io/freshhub/avater1.jpg",
   "2": "https://auxfresh.github.io/freshhub/avater2.jpg",
-  "3": "https://auxfresh.github.io/freshhub/avater3.jpg",
+  "3": "https://auxfresh.github.io/freshhub/avater1.jpg",
 };
 
 export default function LeaderboardSection({ currentUser }: LeaderboardSectionProps) {
