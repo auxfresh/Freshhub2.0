@@ -61,7 +61,7 @@
   }
 
   body {
-    @apply font-sans antialiased bg-social-background text-foreground;
+    @apply font-sans antialiased bg-social-background text-foreground;background : #102F49 
     font-family: 'Inter', system-ui, sans-serif;
   }
 }
@@ -84,7 +84,7 @@
   }
   
   .bg-social-background {
-    background-color: var(--social-background);
+    background-color: #102F49;
   }
   
   .border-social-primary {
