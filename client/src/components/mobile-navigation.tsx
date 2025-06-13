@@ -19,20 +19,22 @@ export default function MobileNavigation({ activeSection, onSectionChange }: Mob
   };
 
   return (
-    <nav className="bg-[#000] border-t border-gray-200 fixed bottom-0 left-0 right-0 z-40 shadow-lg">
+    // Changed background to #4d2e6b and border-t to a slightly lighter shade if desired, or remove if not needed
+    <nav className="bg-[#4d2e6b] border-t border-[#6a4294] fixed bottom-0 left-0 right-0 z-40 shadow-lg">
       <div className="flex justify-around py-2">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeSection === item.id;
-          
+
           return (
             <button
               key={item.id}
               onClick={() => handleNavClick(item)}
+              // Changed icon and text colors to white, and hover effect to a lighter shade of purple
               className={`flex flex-col items-center py-2 px-4 transition-colors ${
-                isActive 
-                  ? "text-social-primary" 
-                  : "text-social-secondary hover:text-social-primary"
+                isActive
+                  ? "text-white" // Active icon/text is white
+                  : "text-gray-300 hover:text-white" // Inactive icons/text are light gray, turn white on hover
               }`}
             >
               <Icon className="w-6 h-6" />
