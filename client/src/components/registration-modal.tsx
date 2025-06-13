@@ -20,17 +20,17 @@ interface RegistrationModalProps {
 const avatarOptions = [
   {
     id: "1",
-    src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+    src: "https://auxfresh.github.io/freshhub/avater1.jpg",
     alt: "Avatar option 1"
   },
   {
     id: "2", 
-    src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+    src: "https://auxfresh.github.io/freshhub/avater3.jpg",
     alt: "Avatar option 2"
   },
   {
     id: "3",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150", 
+    src: "https://auxfresh.github.io/freshhub/avater3.jpg", 
     alt: "Avatar option 3"
   }
 ];
@@ -55,7 +55,7 @@ export default function RegistrationModal({ isOpen, onClose, onUserRegistered }:
     },
     onSuccess: (user: User) => {
       toast({
-        title: "Welcome to SocialHub!",
+        title: "Welcome to Fresh Hub!",
         description: "Your profile has been created successfully.",
       });
       onUserRegistered(user);
@@ -81,7 +81,7 @@ export default function RegistrationModal({ isOpen, onClose, onUserRegistered }:
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center">Welcome to SocialHub</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-center">Welcome to Fresh Hub</DialogTitle>
           <p className="text-social-secondary text-sm text-center">Create your profile to get started</p>
         </DialogHeader>
 
