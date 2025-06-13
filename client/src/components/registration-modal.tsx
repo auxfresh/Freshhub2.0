@@ -25,7 +25,7 @@ const avatarOptions = [
   },
   {
     id: "2", 
-    src: "https://auxfresh.github.io/freshhub/avater3.jpg",
+    src: "https://auxfresh.github.io/freshhub/avater2.jpg",
     alt: "Avatar option 2"
   },
   {
