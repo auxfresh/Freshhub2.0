@@ -19,7 +19,7 @@ export default function MobileNavigation({ activeSection, onSectionChange }: Mob
   };
 
   return (
-    <nav className="bg-[#4d2e6b] border-t border-gray-200 fixed bottom-0 left-0 right-0 z-40 shadow-lg">
+    <nav className="bg-[#000] border-t border-gray-200 fixed bottom-0 left-0 right-0 z-40 shadow-lg">
       <div className="flex justify-around py-2">
         {navItems.map((item) => {
           const Icon = item.icon;
