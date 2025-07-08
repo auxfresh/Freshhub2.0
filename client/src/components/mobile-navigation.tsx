@@ -10,7 +10,7 @@ export default function MobileNavigation({ activeSection, onSectionChange }: Mob
     { id: "feed", label: "Home", icon: Home, href: "https://freshhubweb.netlify.app/" },
     { id: "leaderboard", label: "Standings", icon: Trophy, href: "https://freshhubweb.netlify.app/standings.html" },
     { id: "profile", label: "Community", icon: Users, href: "#" },
-    { id: "https://freshhubweb.netlify.app/more", label: "More", icon: MoreHorizontal, href: "more.html" },
+    { id: "https://freshhubweb.netlify.app/more", label: "More", icon: MoreHorizontal, href: "https://freshhubweb.netlify.app/more.html" },
   ] as const;
 
   const handleNavClick = (item: typeof navItems[number]) => {
