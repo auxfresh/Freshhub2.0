@@ -7,10 +7,10 @@ interface MobileNavigationProps {
 
 export default function MobileNavigation({ activeSection, onSectionChange }: MobileNavigationProps) {
   const navItems = [
-    { id: "feed", label: "Home", icon: Home, href: "https://freshhub.netlify.app/blog.html" },
-    { id: "leaderboard", label: "Standings", icon: Trophy, href: "standings.html" },
-    { id: "profile", label: "Community", icon: Users, href: "blog.html" },
-    { id: "more", label: "More", icon: MoreHorizontal, href: "more.html" },
+    { id: "feed", label: "Home", icon: Home, href: "https://freshhubweb.netlify.app/" },
+    { id: "leaderboard", label: "Standings", icon: Trophy, href: "https://freshhubweb.netlify.app/standings.html" },
+    { id: "profile", label: "Community", icon: Users, href: "#" },
+    { id: "https://freshhubweb.netlify.app/more", label: "More", icon: MoreHorizontal, href: "more.html" },
   ] as const;
 
   const handleNavClick = (item: typeof navItems[number]) => {
